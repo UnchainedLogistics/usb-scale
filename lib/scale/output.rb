@@ -1,15 +1,14 @@
 module Scale
   class Output
-
     attr_accessor :raw_weight
     attr_accessor :raw_stability
     attr_accessor :raw_mode
     attr_accessor :raw_scale_factor
 
-    # Data description for Dymo model S100
+    # Data description for Dymo model M25
     # => [0] Unknown 3
     # => [1] Stability (2 when at 0, 3 when getting stable, 4 when stable, 5 when negative, 6 when too much weight)
-    # => [2] Mode (lbs = 12, kg = 3)
+    # => [2] Mode (lbs = 11, kg = 2)
     # => [3] Scale factor
     # => [4-5] 16 bit weight
 
@@ -27,11 +26,11 @@ module Scale
     end
 
     def in_kg_mode?
-      raw_mode == 3
+      raw_mode == 2
     end
 
     def in_lb_mode?
-      raw_mode == 12
+      raw_mode == 11
     end
 
     def as_lbs
@@ -60,15 +59,14 @@ module Scale
 
     private
 
-      def negative_raw_weight?
-        self.raw_stability == 5
-      end
+    def negative_raw_weight?
+      self.raw_stability == 5
+    end
 
-      def scaled_weight
-        value = raw_weight * (10 ** self.raw_scale_factor)
-        value *= -1 if negative_raw_weight?
-        value
-      end
-
+    def scaled_weight
+      value = raw_weight * (10 ** self.raw_scale_factor)
+      value *= -1 if negative_raw_weight?
+      value
+    end
   end
 end

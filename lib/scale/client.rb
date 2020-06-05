@@ -3,10 +3,9 @@ require 'json'
 
 module Scale
   class Client
-
-    # Dymo S100 Digital USB Postal Scale
+    # Dymo M25 Digital USB Postal Scale
     VENDOR_ID     = 0x0922
-    PRODUCT_ID    = 0x8009
+    PRODUCT_ID    = 0x8003
     USB_DATA_SIZE = 6
 
     def output_as_json

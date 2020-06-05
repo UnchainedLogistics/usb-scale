@@ -1,8 +1,6 @@
 # usb-scale
 
-Reads input from Dymo S100 Digital USB Postal Scale
-
-http://www.dymo.com/en-US/s100lb-digital-usb-shipping-scale
+Reads input from Dymo M25 Digital USB Postal Scale
 
 Raw data format:
 
@@ -14,5 +12,16 @@ Raw data format:
 
 ## Scale
 
-    $ irb -r ./lib/scale.rb
+    $ irb -I ./lib -r ./lib/scale.rb
     > scale = Scale.new
+    > scale.output_as_json
+    
+### Notes
+
+- Can use `lsusb` on linux to list connected devices and get vendor id / product id
+- On OS X can get this same info from "System Menu > About this Mac > System Report"
+- On linux, needed to symlink the HID API library that the gem is looking for:
+
+
+    sudo ln -s /usr/lib/x86_64-linux-gnu/libhidapi-libusb.so /usr/local/lib/libhidapi.so
+
